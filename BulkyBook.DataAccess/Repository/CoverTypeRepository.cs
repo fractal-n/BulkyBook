@@ -20,7 +20,10 @@ namespace BulkyBook.DataAccess.Repository
         public void Update(CoverType coverType)
         {
             var objFromDb = _db.CoverTypes.FirstOrDefault(c => c.Id == coverType.Id);
-            objFromDb.Name = coverType.Name;
+            if (objFromDb != null)
+            {
+                objFromDb.Name = coverType.Name;
+            }
         }
     }
 }
