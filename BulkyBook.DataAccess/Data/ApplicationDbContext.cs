@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using BulkyBook.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
