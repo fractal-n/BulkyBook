@@ -51,8 +51,9 @@ namespace BulkyBook
 
             services.AddAuthentication().AddFacebook(options =>
             {
-                options.AppId = "304623213913874";
-                options.AppSecret = "674c2b81e62d5e76c3a502da634025cc";
+                // Need to config Azure Keyvault for these secrets
+                options.AppId = Configuration["FacebookSignIn:AppId"];
+                options.AppSecret = Configuration["FacebookSignIn:AppSecret"];
             });
 
             services.AddAuthentication().AddGoogle(options =>
@@ -60,8 +61,8 @@ namespace BulkyBook
                 IConfigurationSection googleAuthNSection =
                 Configuration.GetSection("Authentication:Google");
 
-                options.ClientId = "646764826240-5dfua4vlhd84foi1aq7nd45ndlht60eo.apps.googleusercontent.com";
-                options.ClientSecret = "fUzJL4bpQVywQnjXOW07BuB9";
+                options.ClientId = Configuration["GoogleSignIn:ClientId"];
+                options.ClientSecret = Configuration["GoogleSignIn:ClientSecret"];
             });
         }
 
