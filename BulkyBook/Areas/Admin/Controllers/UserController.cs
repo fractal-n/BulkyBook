@@ -80,6 +80,15 @@ namespace BulkyBook.Areas.Admin.Controllers
             return Json(new { success = true, message = "Operation successful" });
         }
 
+        [HttpDelete]
+        public IActionResult Delete(string id)
+        {
+            var objFromDb = _db.ApplicationUsers.FirstOrDefault(u => u.Id == id);
+            _db.ApplicationUsers.Remove(objFromDb);
+            _db.SaveChanges();
+            return Json(new { success = true, message = "Delete successful" });
+        }
+
         #endregion
     }
 }

@@ -37,7 +37,10 @@ namespace BulkyBook
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddSingleton<IEmailSender, EmailSender>();
+            services.Configure<EmailOptions>(Configuration.GetSection("SendGrid"));
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
@@ -58,11 +61,8 @@ namespace BulkyBook
 
             services.AddAuthentication().AddGoogle(options =>
             {
-                IConfigurationSection googleAuthNSection =
-                Configuration.GetSection("Authentication:Google");
-
-                options.ClientId = Configuration["GoogleSignIn:ClientId"];
-                options.ClientSecret = Configuration["GoogleSignIn:ClientSecret"];
+                options.ClientId = Configuration.GetSection("GoogleSignIn")["ClientId"];
+                options.ClientSecret = Configuration.GetSection("GoogleSignIn")["ClientSecret"];
             });
         }
 
